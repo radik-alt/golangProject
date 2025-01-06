@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "radik.sso.v1;sso";
+
+service Auth {
+
+  rpc Register(RegisterRequest) returns (RegisterResponse);
+  rpc LogIn(LogInRequest) returns (LogInResponse);
+  rpc IsAdmin(IsAdminRequest) returns (IsAdminResponse);
+}
+
+message RegisterRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message RegisterResponse {
+  int64 userId = 1;
+}
+
+message LogInRequest {
+  string email = 1;
+  string password = 2;
+  int64 app_id = 3;
+}
+
+message LogInResponse {
+  string token = 1;
+}
+
+message IsAdminRequest {
+  int64 user_id = 1;
+}
+
+message IsAdminResponse {
+  bool is_admin = 1;
+}
